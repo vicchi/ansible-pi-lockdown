@@ -1,0 +1,45 @@
+# ansible-playbook -u pi -k -i 'TARGET-DHCP-IP,' lockdown.yml
+---
+
+- name: Application server specific playbook
+  hosts: all
+  become: yes
+  roles:
+     - set-hostname
+     - create-user
+     - disable-passwords
+     - static-ip
+     - expand-filesystem
+
+  vars_prompt:
+    - name: "hostname"
+      prompt: "Hostname"
+      private: no
+    - name: "username"
+      prompt: "User name"
+      private: no
+    - name: "password"
+      prompt: "Password"
+      private: yes
+      encrypt: "sha512_crypt"
+      confirm: yes
+    - name: "comment"
+      prompt: "Username description"
+      private: no
+    - name: "public_key"
+      prompt: "Path to public SSH key"
+      private: no
+    - name: "interface"
+      prompt: "Ethernet interface"
+      default: "eth0"
+      private: no
+    - name: "ipaddress"
+      prompt: "Static IPv4 address"
+      private: no
+    - name: "routers"
+      prompt: "Routers (comma separated)"
+      private: no
+    - name: "dns_servers"
+      prompt: "DNS servers (comma separated)"
+      default: "8.8.8.8,8.8.4.4"
+      private: no

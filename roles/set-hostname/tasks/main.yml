@@ -1,0 +1,14 @@
+# roles/hostname/tasks/main.yml
+---
+
+- name: Set the hostname
+  become: yes
+  command: hostnamectl set-hostname "{{ hostname }}"
+
+- name: Update /etc/hosts with new hostname
+  become: yes
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "^127.0.1.1\traspberrypi$"
+    line: "127.0.1.1\t{{ hostname }}"
+    state: present

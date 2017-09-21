@@ -1,0 +1,14 @@
+# roles/disable-passwords/tasks/main.yml
+---
+
+# We would normally want to HUP sshd to reload the config file
+# But we'll be rebooting as a result of changing the IP address
+# to static, so just fire the reboot handler
+
+- name: Disable SSH password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    state: present
+  notify: reboot

@@ -1,0 +1,18 @@
+# roles/create-user/tasks/main.yml
+---
+
+- name: Create a (non default) user account
+  become: yes
+  user:
+    name: "{{ username }}"
+    shell: /bin/bash
+    createhome: yes
+    comment: "{{ comment }}"
+    groups: adm,dialout,cdrom,sudo,audio,video,plugdev,games,users,input,netdev,gpio,i2c,spi
+    password: "{{ password }}"
+
+- name: Deploy user's SSH key
+  become: yes
+  authorized_key:
+    user: "{{ username }}"
+    key: "{{ lookup('file', '{{ public_key }}') }}"
