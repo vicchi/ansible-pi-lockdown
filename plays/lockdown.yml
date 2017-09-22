@@ -40,6 +40,6 @@
       prompt: "Routers (comma separated)"
       private: no
     - name: "dns_servers"
-      prompt: "DNS servers (comma separated)"
-      default: "8.8.8.8,8.8.4.4"
+      prompt: "DNS servers (space separated)"
+      default: "8.8.8.8 8.8.4.4"
       private: no
