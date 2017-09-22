@@ -12,7 +12,7 @@ These playbooks also assume that you have [Ansible installed](https://docs.ansib
 
 When a Pi first boots it (usually) receives a DHCP assigned IP address, which the Lockdown playbook changes to a static IP.
 
-To save having to create an inventory file and then immediately update it, these playbooks use a _feature_ of the `--inventory` command line argument for `ansible-playbook` where you can supply an IP address followed _**immediately**_ by a comma so that Ansible know the inventory is a list of hosts (even though there's a single host being targeted).
+To save having to create an inventory file and then immediately update it, these playbooks use a _feature_ of the `--inventory` command line argument for `ansible-playbook` where you can supply an IP address followed _**immediately**_ by a comma so that Ansible knows the inventory is a list of hosts (even though there's a single host being targeted).
 
 Like this ... `--inventory 192.168.10.20,`
 
